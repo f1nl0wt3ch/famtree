@@ -1,0 +1,58 @@
+.container {
+	margin: auto;
+	padding: 50px;
+}
+.card-header {
+	height: 50px !important;
+	background-color: #abc549 !important;
+}
+
+.card-footer {
+	height: 50px !important;
+	background-color: #a1a2a5 !important;
+}
+
+.nav-header:first-child {
+	height: 50px !important;
+	background-color: #abc549 !important;
+}
+.nav-header:last-child {
+	height: 50px !important;
+	background-color: #269b9e !important;
+}
+
+.nav-body {
+	padding: 20px;
+}
+
+input[type=file] {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+#uploadLab {
+	cursor: pointer;
+}
+
+.btn-submit:first-child {
+	width: 10em;
+    height: 2,5 em;
+	color: #f1e5e6 !important;
+	font-weight: bold;
+    background-color: #a0d314!important;
+    border: none;
+    padding-bottom: 2px;
+}
+
+.btn-submit:last-child {
+	width: 10em;
+    height: 2,5 em;
+	color: #f1e5e6 !important;
+	font-weight: bold;
+    background-color: #000000!important;
+    border: none;
+    padding-bottom: 2px;
+}
+
+
