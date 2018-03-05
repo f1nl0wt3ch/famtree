@@ -8,7 +8,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=BenchNine|Satisfy|Shadows+Into+Light" rel="stylesheet">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="resources/libs/jquery-ui-1.11.1/jquery-ui.css">
 <link rel="stylesheet" href="resources/libs/bootstrap-3.3.7/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/normalize.css" />
 <link rel="stylesheet" href="resources/css/demo.css" />
@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="resources/css/index.css">
 
 <!-- JAVASCRIPT AND JQUERY -->
-<script src="resources/libs/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+<script src="resources/js/jquery-1.11.1.min.js"></script>
+<script src="resources/libs/jquery-ui-1.11.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 <script src="resources/libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
@@ -76,13 +77,9 @@
 	           <form>
 	               <fieldset>
 	                    <legend>All member</legend>
-	                    <div class="container">
-	                         <div class="row">
-	                             <div class="col-sm-2 col-xs-2 image-div">Hello</div><!-- col-sm-2 col-xs-2 image-div -->
-	                             <div class="col-sm-8 col-xs-8 info-div">djdjjd</div><!-- col-sm-8 col-xs-8 info-div -->
-	                             <div class="col-sm-2 col-xs-2 option-div">kdkdkd</div> <!-- col-sm-2 col-xs-2 option-div -->
-	                         </div><!-- row -->
-	                    </div><!-- container -->
+	                    <ul class="list-group">
+	                    
+	                    </ul>
 	               </fieldset>
 	           </form>    
 	           </div><!-- result -->
