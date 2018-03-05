@@ -40,7 +40,6 @@ public class AliveServlet extends HttpServlet {
 		response.setCharacterEncoding("ISO-8859-1");
 		response.setContentType("application/json; charset=ISO-8859-1");
 		String jsonData = gson.toJson(dao.findAllAlivePeople("alive_people"));
-		System.out.println(jsonData);
 		out.println(jsonData);
 	}
 

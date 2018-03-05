@@ -42,7 +42,7 @@ public class DaoImpl implements Dao {
 		}
 	}
 
-	public boolean Sulje(Connection con) {
+	public boolean closeConnection(Connection con) {
 		boolean paluu = false;
 		try {
 			con.close();
@@ -60,7 +60,7 @@ public class DaoImpl implements Dao {
 		if(con != null) {
 			try {
 
-				String query = "SELECT id, fullname,address, email, phone, imageLink, detail, bornDate FROM " + table;
+				String query = "SELECT id, fullname,address, email, phone, imageLink, detail, bornDate FROM " + table+" ORDER BY bornDate";
 				rs = sta.executeQuery(query);
 
 				while (rs.next()) {
@@ -78,15 +78,37 @@ public class DaoImpl implements Dao {
 			} catch (Exception e) {
 				System.out.print("error " + e);
 			} finally {
-				Sulje(con);
+				closeConnection(con);
 			}
 		}
 		return (ArrayList<AlivePeople>) peoples;
 	}
 
-	public int insertAlivePeople(List<AlivePeople> peoples, String table) {
-		 String query = "INSERT INTO "+table+"(id, fullname, address, email, phone,bornDate, imageLink, detail) VALUES " ;
-		return 0;
+	public boolean insertAlivePeople(List<AlivePeople> peoples, String table) {
+		Connection con = connectDatabase();
+		if(peoples == null) {
+			return false;
+		} else {
+			String query;
+			if (peoples.size() == 1) {
+				 System.out.println("INSERT AN ALIVE PEOPLE");
+			     query = "INSERT INTO "+table+"(fullname, address, email, phone,bornDate, imageLink, detail) VALUES "+ "('"+
+						       peoples.get(0).getFullName()+"','"+peoples.get(0).getAddress()+"','"+peoples.get(0).getEmail()+"','"
+						       +peoples.get(0).getPhone()+"','"+peoples.get(0).getBornDate()+"','"
+						       +peoples.get(0).getImageLink()+"','"+peoples.get(0).getDetail()+"')";
+			} else {
+				System.out.println("INSERT A LIST OF ALIVE PEOPLE");
+				  query = "INSERT INTO "+table+"(fullname, address, email, phone,bornDate, imageLink, detail) VALUES "+ service.formatAlivesToSQL(peoples) ;
+			}
+			   try {
+				 return sta.execute(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				closeConnection(con);
+			}
+		}
 	}
 
 	public int updateAlivePeople(AlivePeople ap) {

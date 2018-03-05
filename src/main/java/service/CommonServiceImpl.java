@@ -96,8 +96,20 @@ public class CommonServiceImpl implements CommonService {
         }
         reader.close();
         JSONResponseStr = builderStr.toString();
-        System.out.println("Data "+ JSONResponseStr);
         return JSONResponseStr;
     }
+
+	public String formatAlivesToSQL(List<AlivePeople> list) {
+		StringBuilder builderStr = new StringBuilder();
+		for(AlivePeople people : list) {
+			builderStr.append("('"+people.getFullName()+"','"+people.getAddress()+"','"+people.getEmail()+"','"+people.getPhone()
+			                 +"','"+people.getDetail()+"','"+people.getBornDate()+"'),");
+		}
+		return builderStr.toString();
+	}
+
+	public String formatDiedToSQL(List<DiedPeople> list) {
+		return null;
+	}
 	
 }

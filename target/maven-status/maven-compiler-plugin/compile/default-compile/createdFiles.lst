@@ -1,0 +1,14 @@
+dao/DaoImpl.class
+service/CommonService.class
+servlet/IndexServlet.class
+service/SendEmail.class
+dao/Dao.class
+service/Test.class
+domain/AlivePeople.class
+service/UploadImage.class
+domain/DiedPeople.class
+domain/Relation.class
+service/CommonServiceImpl.class
+servlet/AliveServlet.class
+service/ExcelUtil.class
+servlet/DiedServlet.class

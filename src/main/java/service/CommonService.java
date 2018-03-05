@@ -17,4 +17,6 @@ public interface CommonService {
     public HashMap<String, String> findAllParamter(String lang);
     public Timestamp convertStringToTimestamp(String dateStr);
     public String handleRequestFromClient(HttpServletRequest request) throws IOException;
+    public String formatAlivesToSQL(List<AlivePeople> list);
+    public String formatDiedToSQL(List<DiedPeople> list);
 }
