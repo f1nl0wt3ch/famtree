@@ -13,10 +13,10 @@ public class Insert {
 	public static void main(String[] args) {
 		  List<AlivePeople> peoples = new ArrayList<AlivePeople>();
 		  AlivePeople alive = new AlivePeople();
-		  alive.setFullName("Dinh Duc Anh");
+		  alive.setFullName("Dinh Ngoc Mun");
 		  alive.setBornDate(new Timestamp(System.currentTimeMillis()));
-		  alive.setDetail("Brother");
-		  alive.setEmail("nghe.dinh@yahoo.com");
+		  alive.setDetail("Sister");
+		  alive.setEmail("mun.dinh@yahoo.com");
 		  alive.setPhone("0857437373");
 		  alive.setImageLink("https://s3.amazonaws.com/aspph-wp-production/app/uploads/2017/03/Ans-.jpg");
 		  alive.setAddress("Vietnam");

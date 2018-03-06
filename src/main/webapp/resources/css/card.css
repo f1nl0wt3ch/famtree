@@ -64,3 +64,10 @@
 #searchDiv {
 	margin-bottom: 20px;
 }
+
+.glyphicon-famtree {
+	display: block;
+	top: 10px;
+	left: 10px;
+	cursor: pointer;
+}

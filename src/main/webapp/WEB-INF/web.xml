@@ -20,6 +20,12 @@
   	<description></description>
   	<servlet-class>servlet.DiedServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DeleteServlet</servlet-name>
+  	<display-name>DeleteServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.DeleteServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>IndexServlet</servlet-name>
   	<url-pattern>/famtree</url-pattern>
@@ -31,5 +37,9 @@
   <servlet-mapping>
   	<servlet-name>DiedServlet</servlet-name>
   	<url-pattern>/died</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteServlet</servlet-name>
+  	<url-pattern>/delete</url-pattern>
   </servlet-mapping>
 </web-app>

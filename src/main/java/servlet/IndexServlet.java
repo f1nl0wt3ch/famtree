@@ -43,6 +43,7 @@ public class IndexServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int totalAlive = Math.round(dao.findAllAlivePeople("alive_people").size()/6);
 		request.setAttribute("totalAlive", totalAlive);
+		System.out.println(totalAlive);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
@@ -52,12 +53,7 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AlivePeople alive = new AlivePeople();
-		String jsonData = service.handleRequestFromClient(request);
-		System.out.println("Data "+ jsonData);
-		alive = gson.fromJson(jsonData, AlivePeople.class);
-		alives.add(alive);
-		dao.insertAlivePeople(alives, "alive_people");
+		
 	}
 
 }

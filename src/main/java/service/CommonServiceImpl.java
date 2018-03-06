@@ -92,7 +92,7 @@ public class CommonServiceImpl implements CommonService {
         StringBuilder builderStr = new StringBuilder();
         String line, JSONResponseStr;
         while((line = reader.readLine()) != null){
-        	builderStr.append(line);
+        	    builderStr.append(line);
         }
         reader.close();
         JSONResponseStr = builderStr.toString();
@@ -105,7 +105,8 @@ public class CommonServiceImpl implements CommonService {
 			builderStr.append("('"+people.getFullName()+"','"+people.getAddress()+"','"+people.getEmail()+"','"+people.getPhone()
 			                 +"','"+people.getDetail()+"','"+people.getBornDate()+"'),");
 		}
-		return builderStr.toString();
+		String str = builderStr.toString().substring(0, builderStr.toString().length()-1);
+		return str;
 	}
 
 	public String formatDiedToSQL(List<DiedPeople> list) {

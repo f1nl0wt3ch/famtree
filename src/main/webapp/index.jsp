@@ -84,12 +84,9 @@
 	                     </div>
 	                    <legend>All member</legend>
 	                    <div id="result"></div>
-	                    <input type="hidden" name="totalAlive" value="${totalAlive }">
+	                    <input type="hidden" name="pages" value="${totalAlive }">
 	                    <c:if test="${totalAlive > 1}">
 	                        <ul class="pagination pagination-lg" id="paginationUl">
-		                        <c:forEach var="alive" begin="0" end="2">
-		                            <li><a href="#"><c:out value ="${alive}"/></a></li>
-		                        </c:forEach>
 	                        </ul>
 	                    </c:if>
 	               </fieldset>

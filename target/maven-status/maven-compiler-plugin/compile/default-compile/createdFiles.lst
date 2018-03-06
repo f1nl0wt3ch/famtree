@@ -1,10 +1,12 @@
 dao/DaoImpl.class
 service/CommonService.class
+servlet/DeleteServlet.class
 servlet/IndexServlet.class
 service/SendEmail.class
 dao/Dao.class
-service/Test.class
+service/Select.class
 domain/AlivePeople.class
+service/Insert.class
 service/UploadImage.class
 domain/DiedPeople.class
 domain/Relation.class

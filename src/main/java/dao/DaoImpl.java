@@ -115,8 +115,17 @@ public class DaoImpl implements Dao {
 		return 0;
 	}
 
-	public int deleteAlivePeople(AlivePeople ap) {
-		return 0;
+	public int deleteAlivePeople(int id, String table) {
+		String query = "DELETE FROM "+table+" WHERE id="+id;
+		Connection con = connectDatabase();
+		try {
+			return (sta.execute(query))? 1 : 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			closeConnection(con);
+		}
 	}
 
 }
