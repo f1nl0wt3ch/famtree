@@ -71,3 +71,22 @@
 	left: 10px;
 	cursor: pointer;
 }
+
+#paginationUl > li > a {
+	margin: auto !important;
+	width: 40px !important;
+	height: 40px !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	color: #269B9E !important;
+    font-weight: bold !important;
+}
+
+#paginationUl > .active > a {
+  margin: auto !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: #269B9E !important;
+  color: #FFF !important;
+  font-weight: bold !important;
+}
