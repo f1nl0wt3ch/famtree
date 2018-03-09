@@ -3,10 +3,29 @@ function getURL(){
 	var url = window.location.href;
 	return url.split("/")[0]+"//"+url.split("/")[2]+"/"+url.split("/")[3];
 }
-$("#bornDateInput").datepicker();
-$("#bornDateInput").datepicker('option', 'dateFormat', 'yy-mm-dd');
+$("#bornDateInput, #diedDate, #bornDate").datepicker();
+$("#bornDateInput, #diedDate, #bornDate").datepicker('option', 'dateFormat', 'yy-mm-dd');
 $("#uploadLab").click(function(){
 	$(":input[type='file']").click();
+});
+
+/*HANDLE OPTION SELECT EVENT*/
+$(".option-square").click(function() {
+	var data = $(this).attr("data");
+	switch (data) {
+	case "1":
+		$("#diedFieldset").hide();
+		$("#aliveFieldset").show();
+		break;
+	case "2":
+		$("#aliveFieldset").hide();
+		$("#diedFieldset").show();
+		break;
+	default:
+		$("#diedFieldset").hide();
+		$("#diedFieldset").hide();
+		break;
+	}
 });
 var START = 0;
 /*LOAD DATA FROM PAGE LOADING*/
@@ -19,7 +38,7 @@ var loadData = function(){
 	    	 //alert(getURL());
 	    	       $("#result").html("");
 	    	       if(data.length > 6){
-		    	   for(var i = data.length -6 - START; i < data.length - START; i++){
+		    	   for(var i = 0; i < data.length; i++){
 		    		   nameArray.push(data[i].fullname);
 		    		   $("#result").append(
 		    				   '<div class="'+'column-famtree">'+
@@ -80,34 +99,10 @@ $("#searchDiv").autocomplete({
 	   source: nameArray
 });
 
+
 /*DISPLAY ALIVE PEOPLE TO RESULT DIV*/
 $( document ).ready(function(){
 	loadData();
-	/*DELETE MEMBER*/
-	$("span").on('click',function(){
-		alert("span click");
-		var id = $(this).attr('id');
-		$.ajax({
-			beforeSend : function() {
-				alert(id);
-			},
-			url : getURL()+"/delete",
-			method : "POST",
-			crossDomain: true,
-			dataType : "html",
-			data : JSON.stringify(id),
-			success : function(xhr,response) {
-				if(response === 1){
-					alert('Successfully deleted member!');
-					loadData();
-				}
-			},
-			error: function(){
-				alert("error!");
-			}
-		});
-	});
-	
 	/*HANDLE PAGE SELECTION*/
 	$("#paginationDiv #paginationUl li a").on("click", function(){
 		$("#paginationUl li").removeClass();
@@ -117,8 +112,28 @@ $( document ).ready(function(){
 		START = START + page*6;
 		loadData();
 	});
+	/*DELETE MEMBER*/
+	$(".glyphicon-famtree").on('click',function(){
+		alert('glyphicon click!');
+		var id = $(this).attr('id');
+		$.ajax({
+			beforeSend : function() {
+				alert(id);
+			},
+			url : getURL()+"/delete?"+id,
+			method : "GET",
+			crossDomain: true,
+			success : function(xhr,response) {
+					alert('Successfully deleted member!');
+					loadData();
+			},
+			error: function(){
+				alert("error!");
+			}
+		});
+	});
 	/*HANDLE INSERT NEW MEMBER*/
-	$(":input[name='btnSubmit']").click(function(){
+	$(":input[name='aliveSubmit']").click(function(){
 		var alive = new Object();
 		/*GET ALL INPUT*/
 		var fullName = $(":input[name='fullNameInput']").val();
@@ -157,6 +172,34 @@ $( document ).ready(function(){
 				}
 			});
 		}
-	}
-	);
+	});
+	/*HANDLE INSERT NEW DIED MEMBER*/
+	$(":input[name='diedSubmit']").click(function(){
+		var died = new Object();
+		var name = $(":input[name='fullName']").val();
+		var diedDate = $(":input[name='diedDate']").val();
+		var bornDate = $(":input[name='bornDate']").val();
+		died = {
+				name	: name,
+		    diedDate: diedDate,
+		    bornDate: bornDate
+		}
+			/*AJAX CALL HERE*/
+			$.ajax({
+				beforeSend : function() {
+				},
+				url : getURL()+"/died",
+				method : "POST",
+				crossDomain: true,
+				dataType : "html",
+				data : JSON.stringify(died),
+				success : function() {
+					alert("Successfully insert new member!");
+					window.location = getURL()+"/died";
+				},
+				error: function(){
+					alert("error!");
+				}
+			});
+	});
 });

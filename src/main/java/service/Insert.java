@@ -22,7 +22,7 @@ public class Insert {
 		  alive.setAddress("Vietnam");
 		  peoples.add(alive);
           Dao dao = new DaoImpl();
-          System.out.println(dao.insertAlivePeople(peoples, "alive_people"));
+          System.out.println(dao.insertAlivePeople(peoples));
           
 	}
 

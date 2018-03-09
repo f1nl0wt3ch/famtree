@@ -22,11 +22,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class SendEmail {
-	Logger logger = LoggerFactory.getLogger(SendEmail.class);
 	final String CONFIG = "config";
 	CommonService service = new CommonServiceImpl();
 
@@ -82,8 +78,6 @@ public class SendEmail {
 				content = content.replace(entry.getKey().trim(), entry
 						.getValue().trim());
 			} catch (Exception e) {
-				logger.error("NO VALUE FOUND FOR THIS KEY "+ entry.getKey().trim());
-				logger.error(e.toString());
 				content = content.replace(entry.getKey().trim(), "Not found");
 			}
 		}
@@ -115,11 +109,9 @@ public class SendEmail {
 			transport.connect(service.getValueByKey("HOST"), service.getValueByKey("EMAIL_USER"),
 					service.getValueByKey("EMAIL_PASS"));
 			transport.sendMessage(message, message.getAllRecipients());
-			logger.info("EMAIL WAS SENT TO " + recipient + " SUCCESSFUL!  ");
 			transport.close();
 		} catch (Exception e) {
-			logger.error("EMAIL SENDING ERROR " + e);
-			logger.error("EMAIL HAS NOT BEEN SENT!  " + recipient);
+			e.printStackTrace();
 		}
 	}
 }

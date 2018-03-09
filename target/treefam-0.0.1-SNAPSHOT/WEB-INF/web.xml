@@ -26,6 +26,12 @@
   	<description></description>
   	<servlet-class>servlet.DeleteServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>QuarztServlet</servlet-name>
+  	<display-name>QuarztServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.QuarztServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>IndexServlet</servlet-name>
   	<url-pattern>/famtree</url-pattern>
@@ -41,5 +47,9 @@
   <servlet-mapping>
   	<servlet-name>DeleteServlet</servlet-name>
   	<url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>QuarztServlet</servlet-name>
+  	<url-pattern>/QuarztServlet</url-pattern>
   </servlet-mapping>
 </web-app>

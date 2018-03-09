@@ -9,7 +9,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=BenchNine|Satisfy|Shadows+Into+Light" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/libs/bootstrap-3.3.7/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/libs/jquery-ui-1.11.1/jquery-ui.css">
 <link rel="stylesheet" href="resources/css/card.css" />
 <link rel="stylesheet" href="resources/css/normalize.css" />
@@ -18,9 +18,9 @@
 <link rel="stylesheet" href="resources/css/index.css">
 
 <!-- JAVASCRIPT AND JQUERY -->
-<script src="https://code.jquery.com/jquery-1.12.1.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="resources/js/jquery-1.11.1.min.js"></script>
+<script src="resources/libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="resources/libs/jquery-ui-1.11.1/jquery-ui.js"></script>
 
 <title>FAMILY TREE</title>
 <body>
@@ -36,9 +36,15 @@
 	       </div><!-- col-sm-8 col-xs-12 -->
 	    </div><!-- row -->
 	    <div class="row">
-	       <!-- FORM TO UPLOAD EXCEL FILE -->
+	      
 	       <div class="col-sm-4 col-xs-12 nav-body">
-	          <fieldset>
+	          <!-- SELECT OPTION -->
+	          <div class="inline">
+	                  <div class="text-center option-square" data="1">Add an alive</div>
+	                  <div class="text-center option-square" data="2">Add a died</div>
+	          </div>
+	          <!-- INSERT ALIVE PEOPLE -->
+	          <fieldset id="aliveFieldset">
 	             <legend>Insert new member</legend>
                  <div class="form-group">
                       <label for="fullNameInput">Fullname</label>
@@ -69,27 +75,48 @@
 						 <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
 	            </div>
 	            <div class="form-group">
-                      <input type="button" class="btn-submit" name="btnSubmit" value="Submit">
-                      <input type="button" class="btn-submit" name="btnCancel" value="Cancel">
+                      <input type="button" class="btn-submit" name="aliveSubmit" value="Submit">
+                      <input type="button" class="btn-submit" name="aliveCancel" value="Cancel">
                  </div>
-               </fieldset>   
+               </fieldset>
+               <!-- INSERT DIED PEOPLE -->
+               <fieldset id="diedFieldset">
+	             <legend>Insert died member</legend>
+                 <div class="form-group">
+                      <label for="fullName">Fullname</label>
+                      <input type="text" name="fullName" class="form-control">
+                 </div>
+                 <div class="form-group">
+                      <label for="bornDate">Borndate</label>
+                      <input type="text" name="bornDate" id="bornDate" class="form-control">
+                 </div>
+                 <div class="form-group">
+                      <label for="diedDate">Dieddate</label>
+                      <input type="text" name="diedDate" id="diedDate" class="form-control">
+                 </div>
+                 <div class="form-group">
+						 <input type="file" name="file-1[]" id="imageFile" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+						 <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+	            </div>
+	            <div class="form-group">
+                      <input type="button" class="btn-submit" name="diedSubmit" value="Submit">
+                      <input type="button" class="btn-submit" name="diedCancel" value="Cancel">
+                 </div>
+               </fieldset>    
 			</div><!-- col-sm-4 col-xs-12 -->
 	       <!-- ALL MEMBER OF FAMILY -->
 	       <div class="col-sm-8 col-xs-12 nav-body">
-	               <fieldset>
 	                     <div class="col-sm-12 col-xs-12" id="searchDiv">
 	                       <div class="input-group">
 						    <span class="input-group-addon">Search member</span>
 						    <input id="memberInput" type="text" class="form-control" name="memberInput" placeholder="Enter a name">
 						  </div>
 	                     </div>
-	                    <legend>All member</legend>
 	                    <div id="result"></div>
 	                    <div class="col-sm-12 col-xs-12 text-center" id="paginationDiv">
 	                        <ul id="paginationUl" class="pagination pagination-lg">
 	                        </ul>
 	                    </div>
-	               </fieldset>
 	       </div><!-- col-sm-8 col-xs-12 -->
 	    </div><!-- row -->
 	</div><!-- container -->

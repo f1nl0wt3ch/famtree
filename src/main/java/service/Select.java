@@ -15,8 +15,8 @@ public class Select {
         ExcelUtil excel = new ExcelUtil();
         Dao dao = new DaoImpl();
         CommonService service = new CommonServiceImpl();
-        System.out.println(service.formatAlivesToSQL(dao.findAllAlivePeople("alive_people")));
-        System.out.println("Dao "+ dao.findAllAlivePeople("alive_people").size());
+        System.out.println(service.formatAlivesToSQL(dao.findAllAlivePeople()));
+        System.out.println("Dao "+ dao.findAllAlivePeople().size());
         try {
 			List<AlivePeople> list = excel.findAllAlivePeopleFromExcel(new FileInputStream(uri));
 			for(AlivePeople people : list) {

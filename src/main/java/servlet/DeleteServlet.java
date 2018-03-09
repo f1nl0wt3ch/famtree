@@ -30,6 +30,17 @@ public class DeleteServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    /**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String queryStr = request.getQueryString();
+		 System.out.println(queryStr);
+         String jsonData = service.handleRequestFromClient(request);
+         int id = gson.fromJson(jsonData, Integer.class);
+         response.addHeader("status", dao.deleteAlivePeople(id, "alive_people")+"");
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

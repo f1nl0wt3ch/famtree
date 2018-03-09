@@ -46,7 +46,7 @@ public class AliveServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setCharacterEncoding("ISO-8859-1");
 		response.setContentType("application/json; charset=ISO-8859-1");
-		String jsonData = gson.toJson(dao.findAllAlivePeople("alive_people"));
+		String jsonData = gson.toJson(dao.findAllAlivePeople());
 		out.println(jsonData);
 	}
 
@@ -61,7 +61,7 @@ public class AliveServlet extends HttpServlet {
 		System.out.println("Data "+ jsonData);
 		alive = gson.fromJson(jsonData, AlivePeople.class);
 		alives.add(alive);
-		dao.insertAlivePeople(alives, "alive_people");
+		dao.insertAlivePeople(alives);
 	}
 
 }

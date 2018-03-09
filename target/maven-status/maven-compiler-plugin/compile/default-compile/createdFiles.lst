@@ -5,6 +5,7 @@ servlet/IndexServlet.class
 service/SendEmail.class
 dao/Dao.class
 service/Select.class
+servlet/QuarztServlet.class
 domain/AlivePeople.class
 service/Insert.class
 service/UploadImage.class

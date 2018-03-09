@@ -25,7 +25,7 @@
 	border: 2px solid #269b9e;
 	padding: 5px 0px;
 }
-fieldset img {
+.card-famtree img {
 	padding-top: 30px;
 	height: 100px;
 	width: 100px;
@@ -64,6 +64,40 @@ input[type=file] {
     background-color: #000000!important;
     border: none;
     padding-bottom: 2px;
+}
+
+.option-square {
+	margin-bottom: 10px;
+	display: inline-block;
+	border: 2px solid #269b9e;
+	height: 50px;
+	width: 150px;
+	padding: 10px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.option-square:hover {
+	cursor: pointer;
+	height: 50px;
+	width: 150px;
+	padding: 2px;
+	color: #FFF;
+	padding: 10px;
+	font-weight: bold;
+	background-color: #269b9e;
+	font-size: 18px;
+}
+
+.option-square:first-child {
+	background-color: #abc549;
+}
+.option-square:last-child {
+	background-color: #26aae8;
+}
+
+#diedFieldset , #aliveFieldset {
+	display: none;
 }
 
 

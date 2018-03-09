@@ -20,14 +20,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import domain.AlivePeople;
 import domain.DiedPeople;
 
 public class CommonServiceImpl implements CommonService {
-	private Logger logger = LoggerFactory.getLogger(CommonServiceImpl.class);
     final String FILE_URI = "";
     ResourceBundle bundle = ResourceBundle.getBundle("properties/config");
 	public List<AlivePeople> findAllAlivePeople() {
@@ -110,7 +107,13 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	public String formatDiedToSQL(List<DiedPeople> list) {
-		return null;
+		StringBuilder builderStr = new StringBuilder();
+		for(DiedPeople people : list) {
+			builderStr.append("('"+people.getName()+"','"+people.getBornDate()+"','"+people.getDiedDate()+"','"+people.getImageLink()+
+			                 "'),");
+		}
+		String str = builderStr.toString().substring(0, builderStr.toString().length()-1);
+		return str;
 	}
 	
 }

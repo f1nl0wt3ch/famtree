@@ -41,7 +41,7 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int totalAlive = Math.round(dao.findAllAlivePeople("alive_people").size()/6);
+		int totalAlive = Math.round(dao.findAllAlivePeople().size()/6);
 		request.setAttribute("totalAlive", totalAlive);
 		System.out.println(totalAlive);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
