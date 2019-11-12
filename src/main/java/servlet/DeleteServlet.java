@@ -36,9 +36,7 @@ public class DeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 String queryStr = request.getQueryString();
-		 System.out.println(queryStr);
-         String jsonData = service.handleRequestFromClient(request);
-         int id = gson.fromJson(jsonData, Integer.class);
+		 int id= Integer.parseInt(queryStr);
          response.addHeader("status", dao.deleteAlivePeople(id, "alive_people")+"");
 	}
 

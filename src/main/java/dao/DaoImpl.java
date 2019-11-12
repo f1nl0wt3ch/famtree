@@ -61,7 +61,7 @@ public class DaoImpl implements Dao {
 		if(con != null) {
 			try {
 
-				String query = "SELECT id, fullname,address, email, phone, imageLink, detail, bornDate FROM alive_people ORDER BY bornDate";
+				String query = "SELECT id, fullname,address, email, phone, imageLink, detail, bornDate FROM alive_people";
 				rs = sta.executeQuery(query);
 
 				while (rs.next()) {
@@ -113,7 +113,18 @@ public class DaoImpl implements Dao {
 	}
 
 	public int updateAlivePeople(AlivePeople ap) {
-		return 0;
+		String query = "UPDATE alive_people SET fullname='"+ap.getFullName()+
+				"',address='"+ap.getAddress()+"',email='"+ap.getEmail()+"',phone='"+
+				ap.getPhone()+"',bornDate='"+ap.getBornDate()+"',detail='"+ap.getDetail()+"' WHERE id="+ap.getId();
+		Connection con = connectDatabase();
+		try {
+			return (sta.execute(query))? 1 : 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			closeConnection(con);
+		}
 	}
 
 	public int deleteAlivePeople(int id, String table) {
@@ -175,6 +186,35 @@ public class DaoImpl implements Dao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
+			} finally {
+				closeConnection(con);
+			}
+		}
+	}
+
+	public AlivePeople findAlivePeopleById(int id) {
+		if(id == 0) {
+			return null;
+		} else {
+			String query = "SELECT * FROM alive_people WHERE id="+id;
+			AlivePeople people = new AlivePeople();
+			Connection con = connectDatabase();
+			try {
+				rs = sta.executeQuery(query);
+				while (rs.next()) {
+					people.setId(rs.getInt("id"));
+					people.setFullName(rs.getString("fullname"));
+					people.setAddress(rs.getString("address"));
+					people.setEmail(rs.getString("email"));
+					people.setPhone(rs.getString("phone"));
+					people.setBornDate(rs.getTimestamp("bornDate"));
+					people.setDetail(rs.getString("detail"));
+					people.setImageLink(rs.getString("imageLink"));
+				}
+				return people;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
 			} finally {
 				closeConnection(con);
 			}

@@ -4,6 +4,7 @@ servlet/DeleteServlet.class
 servlet/IndexServlet.class
 service/SendEmail.class
 dao/Dao.class
+servlet/UpdateServlet.class
 service/Select.class
 servlet/QuarztServlet.class
 domain/AlivePeople.class

@@ -3,14 +3,15 @@ function getURL(){
 	var url = window.location.href;
 	return url.split("/")[0]+"//"+url.split("/")[2]+"/"+url.split("/")[3];
 }
-$("#bornDateInput, #diedDate, #bornDate").datepicker();
-$("#bornDateInput, #diedDate, #bornDate").datepicker('option', 'dateFormat', 'yy-mm-dd');
+$("#bornDateInput, #diedDate, #bornDate, #bornModal").datepicker();
+$("#bornDateInput, #diedDate, #bornDate, #bornModal").datepicker('option', 'dateFormat', 'yy-mm-dd');
 $("#uploadLab").click(function(){
 	$(":input[type='file']").click();
 });
 
 /*HANDLE OPTION SELECT EVENT*/
 $(".option-square").click(function() {
+	$("input[type='text']").val("");
 	var data = $(this).attr("data");
 	switch (data) {
 	case "1":
@@ -35,10 +36,9 @@ var loadData = function(){
 	    method: "GET",
 	    dataType: "JSON",
 	    success: function(data){
-	    	 //alert(getURL());
 	    	       $("#result").html("");
 	    	       if(data.length > 6){
-		    	   for(var i = 0; i < data.length; i++){
+		    	   for(var i = 0+ START; i < 6+START; i++){
 		    		   nameArray.push(data[i].fullname);
 		    		   $("#result").append(
 		    				   '<div class="'+'column-famtree">'+
@@ -50,23 +50,20 @@ var loadData = function(){
 		    				        '<p class="'+'title">'+data[i].bornDate+'</p>'+
 		    				        '<p>'+data[i].address+'</p>'+
 		    				        '<p>'+data[i].email+'</p>'+
-		    				        '<p><button class="'+'button-famtree">'+data[i].phone+'</button></p>'+
+		    				        '<p><button class="'+'button-famtree" id="'+data[i].id+'" data-toggle="'+'modal" data-target="'+'#myModal">'+data[i].phone+'</button></p>'+
 		    				      '</div>'+
 		    				    '</div>'+
 		    				  '</div>'
 		    		   );
 		    	     }
 		    		   var pages = Math.round(data.length/6);
-		    		   for(var i=1; i < pages+1; i++){
-		    			   if(i < pages) {
-		    			   $("#paginationUl").html(
-		    					   "<li id='"+i+"'><a>"+i+"</a></li>"
-		    					   );} else {
-		    						   $("#paginationUl").append(
-		    		    					   "<li class='"+"active' id='"+i+"'><a>"+i+"</a></li>"
-		    		    					   ); 
-		    					   }
+		    		   $("#paginationUl").html("");
+		    		   for(var i=0; i < pages; i++){
+		    			   $("#paginationUl").append(
+		    					   "<li id='"+i+"'><a>"+(i+1)+"</a></li>"
+		    					   );
 		    		   }
+		    		   $("#"+PAGE).addClass("active");
 		    	   } else {
 		    		   for(var i=0; i < data.length; i++){
 			    		   nameArray.push(data[i].fullname);
@@ -98,40 +95,94 @@ var nameArray = new Array();
 $("#searchDiv").autocomplete({
 	   source: nameArray
 });
+var PAGE = 0;
+/*HANDLE PAGE SELECTION*/
+$( document ).on("click","#paginationUl li", function(){
+	$("#paginationUl li").removeClass();
+	$(this).addClass("active");
+	var page = parseInt($(this).attr("id"));
+	START = page*6;
+	PAGE = page;
+	loadData();
+});
+/*HANDLE PHONE CLICK*/
+$( document).on("click",".button-famtree", function(){
+	 var id= $(this).attr("id");
+     $.ajax({
+	    	    url : getURL()+"/update?"+id,
+	 		method : "GET",
+	 		crossDomain: true,
+	 		success : function(data) {
+	 			$("input[name='fullnameModal']").val(data.fullName);
+	 			$("input[name='emailModal']").val(data.email);
+	 			$("input[name='addressModal']").val(data.address);
+	 			$("input[name='phoneModal']").val(data.phone);
+	 			$("input[name='bornModal']").val(data.bornDate);
+	 			$("input[name='idModal']").val(data.id);
+	 		},
+	 		error: function(){
+	 			alert("error!");
+	 		}
+     });
+});
 
+/*HANDLE UPDATE MODAL CLICK*/
+$( document ).on("click","input[name='updateModal']", function(){
+	var alive = new Object();
+	var fullname = $("input[name='fullnameModal']").val();
+	var email = $("input[name='emailModal']").val();
+	var address = $("input[name='addressModal']").val();
+	var phone = $("input[name='phoneModal']").val();
+	var bornDate = $("input[name='bornModal']").val();
+	var id = $("input[name='idModal']").val();
+	alive = {
+	    fullName: fullname,
+	    email: email,
+	    address: address,
+	    phone: phone,
+	    bornDate: bornDate,
+	    id: id
+	}
+	$.ajax({
+		beforeSend: function(){
+		},
+		url : getURL()+"/update",
+		method : "POST",
+		crossDomain: true,
+		dataType : "html",
+		data : JSON.stringify(alive),
+		success : function() {
+			$('#myModal').modal('hide');
+			loadData();
+		},
+		error: function(){
+			alert("error!");
+		}
+	});
+});
+
+/*DELETE MEMBER*/
+$( document ).on("click",".glyphicon-famtree",function(){
+	var id = $(this).attr('id');
+	$.ajax({
+		beforeSend : function() {
+		},
+		url : getURL()+"/delete?"+id,
+		method : "GET",
+		crossDomain: true,
+		success : function(xhr,response) {
+				alert('Successfully deleted member!');
+				loadData();
+		},
+		error: function(){
+			alert("error!");
+		}
+	});
+});
 
 /*DISPLAY ALIVE PEOPLE TO RESULT DIV*/
 $( document ).ready(function(){
 	loadData();
-	/*HANDLE PAGE SELECTION*/
-	$("#paginationDiv #paginationUl li a").on("click", function(){
-		$("#paginationUl li").removeClass();
-		alert("li click");
-		var page = parseInt($(this).attr("id"));
-		$(this).addClass("active");
-		START = START + page*6;
-		loadData();
-	});
-	/*DELETE MEMBER*/
-	$(".glyphicon-famtree").on('click',function(){
-		alert('glyphicon click!');
-		var id = $(this).attr('id');
-		$.ajax({
-			beforeSend : function() {
-				alert(id);
-			},
-			url : getURL()+"/delete?"+id,
-			method : "GET",
-			crossDomain: true,
-			success : function(xhr,response) {
-					alert('Successfully deleted member!');
-					loadData();
-			},
-			error: function(){
-				alert("error!");
-			}
-		});
-	});
 	/*HANDLE INSERT NEW MEMBER*/
 	$(":input[name='aliveSubmit']").click(function(){
 		var alive = new Object();

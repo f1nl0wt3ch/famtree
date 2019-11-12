@@ -1,0 +1,20 @@
+.borderless td, .borderless th {
+    border: none !important;
+}
+
+input[name=updateModal] {
+	border: 2px solid #FFF;
+	background-color: #269b9e;
+	border-radius: 2%;
+	color: #FFF;
+	font-weight: bold;
+	width: 100px;
+}
+
+input[name=updateModal]:hover {
+	width: 120px;
+	height: 40px;
+	font-weight: bold;
+	font-size: 18px;
+	background-color: #af9e24;
+}

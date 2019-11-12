@@ -32,6 +32,12 @@
   	<description></description>
   	<servlet-class>servlet.QuarztServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UpdateServlet</servlet-name>
+  	<display-name>UpdateServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.UpdateServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>IndexServlet</servlet-name>
   	<url-pattern>/famtree</url-pattern>
@@ -51,5 +57,9 @@
   <servlet-mapping>
   	<servlet-name>QuarztServlet</servlet-name>
   	<url-pattern>/QuarztServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UpdateServlet</servlet-name>
+  	<url-pattern>/update</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -34,7 +34,6 @@ public class AliveServlet extends HttpServlet {
 	 */
 	public AliveServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

@@ -32,7 +32,6 @@ public class IndexServlet extends HttpServlet {
 	 */
 	public IndexServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="resources/css/demo.css" />
 <link rel="stylesheet" href="resources/css/component.css" />
 <link rel="stylesheet" href="resources/css/index.css">
-
+<link rel="stylesheet" href="resources/css/modal.css">
 <!-- JAVASCRIPT AND JQUERY -->
 <script src="resources/js/jquery-1.11.1.min.js"></script>
 <script src="resources/libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
@@ -120,6 +120,81 @@
 	       </div><!-- col-sm-8 col-xs-12 -->
 	    </div><!-- row -->
 	</div><!-- container -->
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4>Update information</h4>
+	      </div>
+	      <div class="modal-body">
+	          <table class="table text-center borderless">
+	               <!-- FULLNAME -->
+	               <tr>
+		               <th>
+		                   <label for="fullnameModal">Fullname</label>
+		               </th>
+		               <td>
+		                   <input type="hidden" name="idModal">
+		                   <input type="text" name="fullnameModal" id="fullnameModal">
+		               </td>
+	               </tr>
+	               <!-- EMAIL -->
+	               <tr>
+		               <th>
+		                   <label for="emailModal">Email</label>
+		               </th>
+		               <td>
+		                   <input type="text" name="emailModal" id="emailModal">
+		               </td>
+	               </tr>
+	               <!-- ADDRESS -->
+	               <tr>
+		               <th>
+		                   <label for="addressModal">Address</label>
+		               </th>
+		               <td>
+		                   <input type="text" name="addressModal" id="addressModal">
+		               </td>
+	               </tr>
+	               <!-- PHONE -->
+	               <tr>
+		               <th>
+		                   <label for="phoneModal">Phone</label>
+		               </th>
+		               <td>
+		                   <input type="text" name="phoneModal" id="phoneModal">
+		               </td>
+	               </tr>
+	                <!-- BORNDATE -->
+	               <tr>
+		               <th>
+		                   <label for="bornModal">Borndate</label>
+		               </th>
+		               <td>
+		                   <input type="text" name="bornModal" id="bornModal">
+		               </td>
+	               </tr>
+	               <!-- BUTTON -->
+	               <tr>
+		               <th>
+		                   <label></label>
+		               </th>
+		               <td>
+		                   <input type="button" class="btn btn-primary" value="Update" name="updateModal">
+		               </td>
+	               </tr>
+	          </table>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	</div>	
 <script type="text/javascript" src="resources/js/index.js"></script>	
 <script src="resources/js/custom-file-input.js"></script>
 </body>
